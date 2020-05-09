@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.home</groupId>
+    <artifactId>employee-management</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>employee-management</name>
+    <description>Employee Management System</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <modules>
+        <module>employee-management-data</module>
+        <module>employee-management-web</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                    <check/>
+                </configuration>
+            </plugin>
+            <plugin>
+
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>install</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+<!--    <scm>-->
+<!--        <developerConnection>scm:git:git@github.com:rsingh33/sfg-pet-clinic.git</developerConnection>-->
+<!--        <tag>HEAD</tag>-->
+<!--    </scm>-->
+
+
+</project>
