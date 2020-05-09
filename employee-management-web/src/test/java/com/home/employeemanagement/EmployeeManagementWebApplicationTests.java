@@ -1,4 +1,4 @@
-package com.hom.employeemanagementweb;
+package com.home.employeemanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
