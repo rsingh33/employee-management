@@ -3,14 +3,16 @@ package com.home.employeemanagement.controllers;
 import com.home.employeemanagement.model.Employee;
 import com.home.employeemanagement.repositories.EmployeeRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/employees/")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
@@ -31,7 +33,8 @@ public class EmployeeController {
         return employees;
     }
 
-    @GetMapping("{employeeId}")
+    @GetMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.OK)
     public Employee getEmployeeById(@PathVariable String employeeId) {
         Employee employee = employeeRepository.findById(Long.valueOf(employeeId)).get();
         employee.add(linkTo(EmployeeController.class)

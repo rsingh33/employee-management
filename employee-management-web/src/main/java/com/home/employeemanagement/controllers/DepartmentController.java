@@ -28,9 +28,16 @@ public class DepartmentController {
     public List<Department> getDepartments() {
         List<Department> departments = departmentRepository.findAll();
 
-        departments.forEach(department ->  department.add(linkTo(DepartmentController.class)
-                .slash(department.getDepartmentId())
-                .withSelfRel()));
+        departments.forEach(department -> {
+            department.add(linkTo(DepartmentController.class)
+                    .slash(department.getDepartmentId())
+                    .withSelfRel());
+            department.getEmployees().forEach(employee ->
+                    employee.add(linkTo(EmployeeController.class)
+                            .slash(employee.getEmployeeId())
+                            .withSelfRel()
+                    ));
+        });
         return departments;
     }
 
