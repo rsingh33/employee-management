@@ -1,12 +1,10 @@
 package com.home.employeemanagement.controllers;
 
 import com.home.employeemanagement.model.Employee;
-import com.home.employeemanagement.repositories.EmployeeRepository;
+import com.home.employeemanagement.services.EmployeeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Min;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -15,16 +13,16 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getAll() {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeService.getAllEmployees();
 
         employees.forEach(employee -> employee.add(linkTo(EmployeeController.class)
                 .slash(employee.getEmployeeId())
@@ -36,7 +34,7 @@ public class EmployeeController {
     @GetMapping("/{employeeId}")
     @ResponseStatus(HttpStatus.OK)
     public Employee getEmployeeById(@PathVariable String employeeId) {
-        Employee employee = employeeRepository.findById(Long.valueOf(employeeId)).get();
+        Employee employee = employeeService.getEmployeeById(Long.valueOf(employeeId));
         employee.add(linkTo(EmployeeController.class)
                 .slash(employee.getEmployeeId())
                 .withSelfRel());

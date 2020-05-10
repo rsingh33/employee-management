@@ -2,6 +2,7 @@ package com.home.employeemanagement.controllers;
 
 import com.home.employeemanagement.model.Department;
 import com.home.employeemanagement.repositories.DepartmentRepository;
+import com.home.employeemanagement.services.DepartmentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,21 +13,21 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/department/")
+@RequestMapping("/departments/")
 public class DepartmentController {
 
-    private final DepartmentRepository departmentRepository;
+    private final DepartmentService departmentService;
     private final EmployeeController employeeController;
 
-    public DepartmentController(DepartmentRepository departmentRepository,
+    public DepartmentController(DepartmentService departmentService,
                                 EmployeeController employeeController) {
-        this.departmentRepository = departmentRepository;
+        this.departmentService = departmentService;
         this.employeeController = employeeController;
     }
 
     @GetMapping
     public List<Department> getDepartments() {
-        List<Department> departments = departmentRepository.findAll();
+        List<Department> departments = departmentService.getAllDepartments();
 
         departments.forEach(department -> {
             department.add(linkTo(DepartmentController.class)
@@ -43,7 +44,7 @@ public class DepartmentController {
 
     @GetMapping("{departmentId}")
     public Department getDepartmentById(@PathVariable String departmentId) {
-        Department department = departmentRepository.findById(Long.valueOf(departmentId)).get();
+        Department department = departmentService.getDepartmentById(Long.valueOf(departmentId));
         department.add(linkTo(DepartmentController.class)
                 .slash(department.getDepartmentId())
                 .withSelfRel());

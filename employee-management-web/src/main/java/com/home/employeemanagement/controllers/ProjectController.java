@@ -1,14 +1,11 @@
 package com.home.employeemanagement.controllers;
 
 import com.home.employeemanagement.model.Project;
-import com.home.employeemanagement.repositories.ProjectRepository;
-import com.sun.deploy.net.HttpResponse;
-import org.springframework.hateoas.Link;
+import com.home.employeemanagement.services.ProjectService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.resource.HttpResource;
 
 import java.util.List;
 
@@ -18,15 +15,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping("/projects/")
 public class ProjectController {
 
-    private final ProjectRepository projectRepository;
+    private final ProjectService projectService;
 
-    public ProjectController(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     @GetMapping
     public List<Project> getProjects() {
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectService.getAllProjects();
         projects.forEach(project -> {
                     project.add(linkTo(ProjectController.class)
                             .slash(project.getProjectId())
@@ -45,7 +42,7 @@ public class ProjectController {
     @GetMapping({"{projectId}"})
 
     public Project getProjectById(@PathVariable String projectId) {
-        Project project = projectRepository.findById(Long.valueOf(projectId)).get();
+        Project project = projectService.getProjectById(Long.valueOf(projectId));
         project.add(linkTo(ProjectController.class)
                 .slash(project.getProjectId())
                 .withSelfRel());
