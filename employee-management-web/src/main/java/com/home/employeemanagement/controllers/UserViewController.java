@@ -1,14 +1,12 @@
 package com.home.employeemanagement.controllers;
 
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.home.employeemanagement.model.UserAccount;
+import com.home.employeemanagement.model.Views;
 import com.home.employeemanagement.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,52 +16,62 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Slf4j
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/users/views")
+public class UserViewController {
 
     private final UserService userService;
     private final PasswordEncoder bCryptEncoder;
 
-    public UserController(UserService userService, PasswordEncoder bCryptEncoder
-                          ) {
+    public UserViewController(UserService userService, PasswordEncoder bCryptEncoder
+    ) {
         this.userService = userService;
         this.bCryptEncoder = bCryptEncoder;
     }
 
+/*
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserAccount> getAllUserAccounts() {
         List<UserAccount> userAccounts = userService.getAllUsers();
 
-        userAccounts.forEach(userAccount -> userAccount.add(linkTo(UserController.class)
+        userAccounts.forEach(userAccount -> userAccount.add(linkTo(UserViewController.class)
+                .slash("views")
                 .slash(userAccount.getUserId())
                 .withSelfRel()));
 
         return userAccounts;
     }
+*/
 
-    @GetMapping("/{userID}")
+    @JsonView(Views.ExternalUser.class)
+    @GetMapping("/external/{userID}")
     @ResponseStatus(HttpStatus.OK)
-    public UserAccount getUserById(@PathVariable String userID) {
+    public UserAccount getExternalUserById(@PathVariable String userID) {
         UserAccount userAccount = userService.getUserById(Long.valueOf(userID));
 
-        userAccount.add(linkTo(UserController.class)
+        userAccount.add(linkTo(UserViewController.class)
+                .slash("views")
+                .slash("external")
                 .slash(userAccount.getUserId())
                 .withSelfRel());
 
-      /*  FilterProvider filterProvider = new SimpleFilterProvider()
-                .addFilter("userFilter",
-                        SimpleBeanPropertyFilter
-                                .serializeAllExcept("password"));
-
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userAccount);
-        mappingJacksonValue.setFilters(filterProvider);
-
-        return (UserAccount) mappingJacksonValue.getValue();*/
         return userAccount;
     }
 
+    @JsonView(Views.InternalUser.class)
+    @GetMapping("/internal/{userID}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserAccount getInternalUserById(@PathVariable String userID) {
+        UserAccount userAccount = userService.getUserById(Long.valueOf(userID));
+
+        userAccount.add(linkTo(UserViewController.class)
+                .slash("views")
+                .slash("internal")
+                .slash(userAccount.getUserId())
+                .withSelfRel());
+        return userAccount;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -72,8 +80,6 @@ public class UserController {
         userAccount.setPassword(bCryptEncoder.encode(userAccount.getPassword()));
         return userService.saveUser(userAccount);
     }
-
-
 
 
 }
