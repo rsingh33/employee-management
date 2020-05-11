@@ -28,8 +28,8 @@ public class UserController {
     public List<UserAccount> getAllUserAccounts() {
         List<UserAccount> userAccounts = userService.getAllUsers();
 
-        userAccounts.forEach(employee -> employee.add(linkTo(EmployeeController.class)
-                .slash(employee.getUserId())
+        userAccounts.forEach(userAccount -> userAccount.add(linkTo(UserController.class)
+                .slash(userAccount.getUserId())
                 .withSelfRel()));
 
         return userAccounts;
@@ -39,7 +39,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserAccount getUserById(@PathVariable String userID) {
         UserAccount userAccount = userService.getUserById(Long.valueOf(userID));
-        userAccount.add(linkTo(EmployeeController.class)
+        userAccount.add(linkTo(UserController.class)
                 .slash(userAccount.getUserId())
                 .withSelfRel());
         return userAccount;
