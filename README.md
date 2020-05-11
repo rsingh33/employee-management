@@ -13,6 +13,7 @@ Features:
 9. Custom error page instead of white label
 10. Custom Validation example
 11. Project Lombok (exclusions etc)
+12. Filtering view using JsonView
 
 Coming Soon.....
 
