@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Slf4j
 @RestController
-@RequestMapping("/employeesss")
+@RequestMapping("/legacy/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;

@@ -11,7 +11,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/projectsss")
+@RequestMapping("/legacy/projects")
 public class ProjectController {
 
     private final ProjectService projectService;

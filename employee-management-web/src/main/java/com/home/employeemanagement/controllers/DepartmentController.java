@@ -13,7 +13,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/departmentsss")
+@RequestMapping("/legacy/departments")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
