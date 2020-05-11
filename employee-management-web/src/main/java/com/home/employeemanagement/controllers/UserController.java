@@ -1,11 +1,10 @@
 package com.home.employeemanagement.controllers;
 
 
-import com.home.employeemanagement.model.Employee;
 import com.home.employeemanagement.model.UserAccount;
 import com.home.employeemanagement.services.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +16,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder bCryptEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder bCryptEncoder) {
         this.userService = userService;
+        this.bCryptEncoder = bCryptEncoder;
     }
 
 
@@ -49,6 +50,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserAccount saveUser(@RequestBody UserAccount userAccount) {
+        userAccount.setPassword(bCryptEncoder.encode(userAccount.getPassword()));
         return userService.saveUser(userAccount);
     }
 
