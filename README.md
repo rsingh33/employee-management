@@ -14,6 +14,7 @@ Features:
 10. Custom Validation example
 11. Project Lombok (exclusions etc)
 12. Filtering view using JsonView
+13. Use of DTOs using ModelMapper and MapStruct
 
 Coming Soon.....
 
