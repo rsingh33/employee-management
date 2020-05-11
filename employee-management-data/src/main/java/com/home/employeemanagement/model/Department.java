@@ -1,5 +1,6 @@
 package com.home.employeemanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
@@ -22,7 +23,7 @@ public class Department extends RepresentationModel<Department> {
     private Long departmentId;
     private String name;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 

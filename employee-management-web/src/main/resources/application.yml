@@ -1,0 +1,34 @@
+logging:
+  level:
+    root: WARN
+    com:
+      home:
+        employeemanagement: DEBUG
+    org:
+      springframework: INFO
+  file:
+    name: app.log
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    database: mysql
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/employee_management?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: employeeManager
+    password: Singh@king90
+
+
+server:
+  error:
+    whitelabel:
+      enabled: false

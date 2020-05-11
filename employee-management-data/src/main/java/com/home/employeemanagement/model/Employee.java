@@ -1,6 +1,8 @@
 package com.home.employeemanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.home.employeemanagement.validation.UniqueValue;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -12,10 +14,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-//@EqualsAndHashCode(exclude = {"project"})
-//@ToString(exclude = {"project"})
+@EqualsAndHashCode(exclude = {"project" , "departmeent"})
+@ToString(exclude = {"project" , "departmeent"})
 @Entity
 public class Employee extends RepresentationModel<Employee> {
 
@@ -25,9 +25,10 @@ public class Employee extends RepresentationModel<Employee> {
 
     private String firstName;
     private String lastName;
+    @UniqueValue
     private String email;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -36,7 +37,7 @@ public class Employee extends RepresentationModel<Employee> {
     @JoinColumn(name = "departmentId")
     private Department department;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,

@@ -1,5 +1,6 @@
 package com.home.employeemanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
@@ -25,7 +26,7 @@ public class Project extends RepresentationModel<Project> {
     private Stage stage;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,

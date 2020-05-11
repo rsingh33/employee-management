@@ -1,18 +1,17 @@
 package com.home.employeemanagement.controllers;
 
+import com.home.employeemanagement.model.Employee;
 import com.home.employeemanagement.model.Project;
 import com.home.employeemanagement.services.ProjectService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/projects/")
+@RequestMapping("/projectsss")
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -39,7 +38,7 @@ public class ProjectController {
         return projects;
     }
 
-    @GetMapping({"{projectId}"})
+    @GetMapping({"/{projectId}"})
 
     public Project getProjectById(@PathVariable String projectId) {
         Project project = projectService.getProjectById(Long.valueOf(projectId));
@@ -54,5 +53,29 @@ public class ProjectController {
                                 .withSelfRel())
         );
         return project;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Project saveProject(@RequestBody Project project) {
+        return projectService.saveProject(project);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Project updateProject(@RequestBody Project project) {
+        return projectService.saveProject(project);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Project patchProject(@PathVariable String id, @RequestBody Project patchProject) {
+        return projectService.patchProject(Long.valueOf(id) , patchProject);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProject(@PathVariable Long id){
+        projectService.deleteByID(Long.valueOf(id));
     }
 }

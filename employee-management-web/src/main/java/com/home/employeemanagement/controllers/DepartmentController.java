@@ -13,7 +13,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/departments/")
+@RequestMapping("/departmentsss")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
@@ -42,7 +42,7 @@ public class DepartmentController {
         return departments;
     }
 
-    @GetMapping("{departmentId}")
+    @GetMapping("/{departmentId}")
     public Department getDepartmentById(@PathVariable String departmentId) {
         Department department = departmentService.getDepartmentById(Long.valueOf(departmentId));
         department.add(linkTo(DepartmentController.class)
