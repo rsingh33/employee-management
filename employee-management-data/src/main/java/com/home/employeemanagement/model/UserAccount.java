@@ -22,6 +22,8 @@ public class UserAccount extends RepresentationModel<UserAccount> {
 
     private String email;
     private boolean enabled = true;
-    @JsonIgnore
+    //@JsonIgnore
     private String password;
+
+    private String role;
 }

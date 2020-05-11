@@ -3,6 +3,7 @@ package com.home.employeemanagement.controllers;
 
 import com.home.employeemanagement.model.UserAccount;
 import com.home.employeemanagement.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -50,6 +52,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserAccount saveUser(@RequestBody UserAccount userAccount) {
+        log.debug("###### \n" +userAccount);
         userAccount.setPassword(bCryptEncoder.encode(userAccount.getPassword()));
         return userService.saveUser(userAccount);
     }
