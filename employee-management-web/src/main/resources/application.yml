@@ -44,6 +44,12 @@ server:
       enabled: false
 
 management:
+  metrics:
+    export:
+      jmx:
+        enabled: true
+      appoptics:
+        api-token: YOFsDngv-HMpE-t_HGJNfg-OeBrP901xSp3V4S4R4Sq-fmVtRN662-N7y1sz-EfISgXlW6U
   endpoints:
     web:
       exposure:
