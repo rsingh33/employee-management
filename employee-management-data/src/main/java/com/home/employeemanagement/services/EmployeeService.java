@@ -54,6 +54,9 @@ public class EmployeeService implements CrudService {
         if (patchEmployee.getProjects() != null) {
             employee.setProjects(patchEmployee.getProjects());
         }
+        if (patchEmployee.getAddress() != null) {
+            employee.setAddress(patchEmployee.getAddress());
+        }
 
         return employeeRepository.save(employee);
     }

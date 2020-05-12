@@ -28,6 +28,7 @@ public class Employee extends RepresentationModel<Employee> {
     @UniqueValue
     private String email;
 
+    private String address;
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,

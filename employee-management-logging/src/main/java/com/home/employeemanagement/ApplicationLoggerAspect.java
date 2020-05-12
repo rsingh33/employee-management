@@ -35,20 +35,20 @@ public class ApplicationLoggerAspect {
 
     @Around("controllerPointCut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        log.debug("######## Before Advice Method Execution ######### \n {} . {} with arguments[s] {}",
+        log.debug("######## Before {} . {} with arguments[s] {}",
                 joinPoint.getSignature().getDeclaringType(),
                 joinPoint.getSignature().getDeclaringTypeName(),
                 Arrays.toString(joinPoint.getArgs()));
 
-        log.debug("________________________________________________________________________ \n \n");
+        log.debug("________________________________________________________________________");
 
        Object o =  joinPoint.proceed();
 
-        log.debug("######## After Advice Method Execution ######### \n {} . {} with arguments[s] {}",
+        log.debug("######## After {} . {} with arguments[s] {}",
                 joinPoint.getSignature().getDeclaringType(),
                 joinPoint.getSignature().getDeclaringTypeName(),
                 Arrays.toString(joinPoint.getArgs()));
-        log.debug("________________________________________________________________________ \n \n");
+        log.debug("________________________________________________________________________");
 
         return o;
     }

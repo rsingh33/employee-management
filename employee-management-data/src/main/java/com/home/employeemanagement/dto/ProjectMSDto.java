@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
 public class ProjectMSDto {
 
     private String name;
+
+    private String projectDescription;
     private Stage stage;
     private List<Employee> employees;
 }

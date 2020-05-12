@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-11T19:22:50-0400",
+    date = "2020-05-11T22:36:50-0400",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 )
 @Component
@@ -24,6 +24,7 @@ public class ProjectMapperImpl implements ProjectMapper {
 
         ProjectMSDto projectMSDto = new ProjectMSDto();
 
+        projectMSDto.setProjectDescription( project.getDescription() );
         projectMSDto.setName( project.getName() );
         projectMSDto.setStage( project.getStage() );
         List<Employee> list = project.getEmployees();
