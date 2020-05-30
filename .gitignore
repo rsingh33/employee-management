@@ -70,7 +70,7 @@ local.properties
 /log/
 /target/
 */target/*
-*/target
+*/target/**
 app.log.2020-05-27.0.gz
 
 ######################
