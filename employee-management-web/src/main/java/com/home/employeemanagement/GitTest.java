@@ -7,6 +7,9 @@ public class GitTest {
         System.out.println("git status 333");
         System.out.println("git checkout master");
         System.out.println("git branch develop");
+        
+        System.out.println("Adding a line to be removed later");
+        System.out.println("Adding more junk to undooo");
 
     }
 }
