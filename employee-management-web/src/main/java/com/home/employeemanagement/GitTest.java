@@ -12,6 +12,7 @@ public class GitTest {
         System.out.println("Adding more junk to undooo");
 
         System.out.println("Git figuring out where my head is!!");
+        System.out.println("Git merge conflict on repo!!");
 
         System.out.println("Working out with GIT Merge");
 
