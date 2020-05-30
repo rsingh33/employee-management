@@ -139,7 +139,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-HELP.md
-employee-management-web/src/main/resources/static/
-employee-management-web/src/main/resources/templates/
-!/app.log.2020-05-10.0.gz

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.home.employeemanagement.validation.UniqueValue;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
