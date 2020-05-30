@@ -13,5 +13,6 @@ public class GitTest {
 
         System.out.println("Git figuring out where my head is!!");
 
+        System.out.println("Working out with GIT Merge");
     }
 }
