@@ -2,7 +2,7 @@ Project/Employee Management.
 
 Features:
 
-. Rest APIS using Spring data rest and manual coded Rest Apis
+. Rest APIS using Spring data rest and manually coded Apis
 . SPRING Security with custom users from database
 . Links Using Hateos
 . Paging and Sorting example
@@ -14,7 +14,7 @@ Features:
 . Custom Validation example
 . Project Lombok (exclusions etc)
 . Filtering view using JsonView
-. Use of DTOs using ModelMapper and MapStruct
+. DTOs using ModelMapper and MapStruct
 . Actuator with Spring Boot Admin, Micrometer and AppOptics
 
 Coming Soon…..
@@ -22,5 +22,6 @@ Coming Soon…..
 1. Unit and Integration Test
 2. Continuous Integration with Circle CI
 3. Code coverage using Code COV
-4. Spring MVC with thymeleaf/ also front-end with Angular
+4. Spring Views using thymeleaf/ also front-end with Angular
 5. Exception Handling
+6. Swagger Documentation
