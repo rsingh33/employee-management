@@ -10,7 +10,8 @@ public class GitTest {
         
         System.out.println("Adding a line to be removed later");
 
-        System.out.println("Adding more junk to undo2222");
+        System.out.println("Adding more junk to undoBadMergeConflict");
+
 
         System.out.println("Git figuring out where my head is!!");
         System.out.println("Git merge conflict on repo!!");
